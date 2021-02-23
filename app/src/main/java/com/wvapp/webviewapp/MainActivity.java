@@ -3,22 +3,13 @@ package com.wvapp.webviewapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.android.installreferrer.api.InstallReferrerClient;
 import com.android.installreferrer.api.InstallReferrerStateListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.onesignal.OneSignal;
 import com.wvapp.webviewapp.Fragments.FormFragment;
 import com.wvapp.webviewapp.Fragments.VisitorsListFragment;
@@ -64,25 +55,6 @@ public class MainActivity extends AppCompatActivity {
         // Automatic tracking of user activity.
         YandexMetrica.enableActivityAutoTracking(getApplication());
 
-        FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent())
-                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
-                    @Override
-                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                        Log.i("DeepLink","DeepLink Is here ");
-                        Uri deepLink=null;
-                        if (pendingDynamicLinkData!=null){
-                            deepLink=pendingDynamicLinkData.getLink();
-                        }
-                        if (deepLink!=null){
-                            Log.i("DeepLink","DeepLink Is : "+deepLink.toString());
-                        }
-                    }
-                }).addOnFailureListener(this, new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i("DeepLink","Couldn't get Link((( ");
-            }
-        });
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
         // OneSignal Initialization
         OneSignal.initWithContext(this);

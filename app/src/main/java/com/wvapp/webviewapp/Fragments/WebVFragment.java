@@ -43,7 +43,7 @@ public class WebVFragment extends Fragment {
         webFragmentView = inflater.inflate(R.layout.fragment_web_v, container, false);
         context=getContext();
 
-        FirebaseApp.initializeApp(getContext());
+//        FirebaseApp.initializeApp(getContext());
         FirebaseDynamicLinks.getInstance().getDynamicLink(getActivity().getIntent())
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<PendingDynamicLinkData>() {
                     @Override
